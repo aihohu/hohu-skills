@@ -1,7 +1,7 @@
 AGENTS.md
 CONTRIBUTING.md
 docs/adr/0001-portable-workflow.md
-docs/business-module.md
+docs/workflows.md
 docs/DOCUMENTATION.md
 docs/installation.md
 docs/README.md

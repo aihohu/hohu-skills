@@ -1,10 +1,12 @@
 # 本地源码安装与维护
 
-在线使用优先选择 `npx skills@latest add aihohu/hohu-skills` 或 `hohu skills install`。完整用户步骤、Agent 标识、更新和排错统一维护在 [HoHu 安装指南](https://hohu.org/zh/guide/cli/skills)。本页面向本地开发和离线源码场景。
+本页用于测试本地修改，或在无 npm 的环境中安装已取得的 Skills 源码。通过官方仓库在线安装，见 [HoHu 安装指南](https://hohu.org/zh/guide/cli/skills)。
 
 ## 用上游安装器验证本地源码
 
-在准备安装的业务项目目录执行，将示例源路径替换为实际的 hohu-skills 检出目录：
+准备好本地 hohu-skills 源码、Node.js 22.20.0+ 和 npm/npx。首次使用安装器需要访问 npm；完全离线时使用下方 Python 复制方式。
+
+进入准备使用 Agent 的工作区，将示例源路径替换为实际的 hohu-skills 检出目录：
 
 ```sh
 npx skills@1.7.0 add /path/to/hohu-skills --skill hohu-project hohu-business-module -a codex
@@ -28,11 +30,13 @@ python scripts/install.py --tool codex --project /path/to/business-project --ski
 
 复制器输出 `preview`、`installed` 或 `unchanged`。已有内容不同则拒绝覆盖；更新前比较定制，将原 Skill 备份到不参与宿主发现的位置再安装。卸载只移除这个 Skill 目录，保留宿主其他设置。
 
-该脚本不建立上游锁文件，勿在同一安装目标混用两套管理方式。它不修改全局配置、AGENTS.md 或 CLAUDE.md。手动复制时保留完整的 SKILL.md、references 和 scripts。
+该脚本不建立上游锁文件，勿在同一安装目标混用两套管理方式。它不修改全局配置、AGENTS.md 或 CLAUDE.md。手动复制时保留所选 Skill 目录的全部内容，包括 `SKILL.md` 及其引用资源。
 
-## 发布与验证
+## 确认安装结果
 
-远程入口读取 Git 仓库，本地未推送的内容不能通过仓库名安装。先验证本地安装；发布到远程后再验证官方来源，不能用本地路径测试冒充远程成功。
+在目标工作区重新打开 Agent 会话，确认能发现所选 Skill，并明确指定 `hohu-project` 或 `hohu-business-module` 发起任务。前者应先检查实际 CLI，后者应先识别目标项目及兼容性。详细场景见[验证指南](validation.md)。
+
+本地安装用于测试工作区中的源码；通过仓库名安装读取远端内容。发布后还需按在线指南重新验证官方来源。
 
 确认目标目录包含有效的 `SKILL.md` 及引用资源。上游提示 `No skills found` 时，即使退出码为 0 也没有安装成功；仓库可克隆但没有 Skill 内容属于发布状态问题，不应归因于网络。
 
