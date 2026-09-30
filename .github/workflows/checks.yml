@@ -1,0 +1,28 @@
+name: Checks
+on:
+  push:
+  pull_request:
+
+jobs:
+  helpers:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install ruff coverage
+      - name: Validate helpers
+        env:
+          HOHU_TEST_TMP: ${{ github.workspace }}/.local/tests
+          COVERAGE_FILE: ${{ github.workspace }}/.local/reports/.coverage
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          mkdir -p .local/tests .local/reports
+          ruff check . --cache-dir .local/cache/ruff
+          ruff format --check . --cache-dir .local/cache/ruff
+          coverage run --source=scripts,skills/hohu-business-module/scripts -m unittest discover -s tests -v
+          coverage report --fail-under=70

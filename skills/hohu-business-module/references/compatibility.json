@@ -1,0 +1,38 @@
+{
+  "skill_version": "0.1.0",
+  "components": {
+    "backend": {
+      "folder": "hohu-admin",
+      "version": "0.1.5",
+      "reviewed_commits": ["20d065dc610428962fcf2cdaf65d7d916c4408b2"],
+      "capabilities": {
+        "app/main.py": ["include_router"],
+        "alembic/env.py": ["target_metadata"],
+        "app/core/tenant_scope.py": ["tenant_select", "tenant_filter", "tenant_values"],
+        "app/core/tenant_inventory.py": ["TENANT_MODEL_INVENTORY", "TenantResource"],
+        "app/modules/auth/service.py": ["get_current_tenant_context"],
+        "app/modules/ai/core/context.py": ["approved_business_snapshot"],
+        "app/modules/ai/agents/tools/meta.py": ["hitl_always", "projection_kind"],
+        "app/modules/ai/agents/tools/__init__.py": ["BUILTIN_TOOL_MODULES"],
+        "app/modules/ai/agents/hitl/constants.py": ["business_snapshot", "execution_args", "summary_key"],
+        "app/modules/ai/service/result_projection_service.py": ["_authorize_subject"],
+        "scripts/seed_ai_agents.py": ["AGENT_SEED"],
+        "app/modules/system/menu_seed.py": ["MENU_DEFINITIONS"]
+      }
+    },
+    "web": {
+      "folder": "hohu-admin-web",
+      "version": "0.1.5",
+      "reviewed_commits": ["3a8e542262a85b17aea9529404e03f5e895b2953"],
+      "capabilities": {
+        "src/service/request/index.ts": ["request"],
+        "src/typings/app.d.ts": ["namespace I18n", "confirm"],
+        "src/locales/langs/en-us.ts": ["builtin", "errorCode"],
+        "src/locales/langs/zh-cn.ts": ["builtin", "errorCode"],
+        "src/router/index.ts": ["router"]
+      }
+    }
+  },
+  "cli_version": "0.1.13",
+  "tutorial_commit": "2992004"
+}
