@@ -23,7 +23,7 @@ Use the user's component selection. When unspecified, state Backend and Web as t
 hohu create my-project --component backend --component web --non-interactive
 ```
 
-`--component` is repeatable; backend, frontend/web and app are supported. Explicit components skip selection prompts. Older CLIs may offer only interactive creation: use an available interactive terminal or a compatible CLI installation; report the limitation if neither is available. Do not monkeypatch CLI internals or guess unsupported flags. The legacy `--repo` overrides every selected component's source, so use it only for an intentional common source or a single-component test.
+`--component` is repeatable. Use one literal value per option: `backend`, `frontend`, `web` (alias of `frontend`), or `app`. Do not combine names with `/`. Explicit components skip selection prompts. Older CLIs may offer only interactive creation: use an available interactive terminal or a compatible CLI installation; report the limitation if neither is available. Do not monkeypatch CLI internals or guess unsupported flags. The legacy `--repo` overrides every selected component's source, so use it only for an intentional common source or a single-component test.
 
 Check exit status, project marker and actual component checkouts. Existing paths must not be overwritten. A failed clone may leave partial files: inspect them and recover only the missing step; do not delete or silently reuse unrelated work. Retry a transient network failure once; use a local source only when authorized and record its actual revision. Keep TLS verification enabled.
 
